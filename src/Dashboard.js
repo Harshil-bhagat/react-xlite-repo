@@ -17,7 +17,7 @@ const Dashboard = ({state}) => {
         <div>
             <div className="card" style={cssStyle}>
                     <div className="card-body">
-                        <h5 className="card-text">Account: {state.accounts}</h5>
+                        <h5 className="card-text">Account: {state.account}</h5>
                         <p className="card-text">Balance: {state.balance}</p>
                     </div>
             </div>

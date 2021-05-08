@@ -16,8 +16,10 @@
   }
 }
 
+
+
 .App-header {
-  background-color: #282c34;
+  background-color: #3B3F5A;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,4 +39,69 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Custome CSS */
+.navStyle {
+  width: 75%;
+  margin: 10px auto;
+  background-color:#252B3C
+}
+
+.dashboard{
+  background-color: #252B3C !important; 
+  color: white;
+  position: relative;
+  width:80%;
+  display: flex;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.dash-content{
+  display: flex;
+  justify-content: space-between;
+}
+.personal-content{
+  display: flex;
+  flex-direction: column;
+  
+}
+.ulList{
+  List-style-type: none;
+  padding: 0px;
+}
+.list{
+  border-bottom: white;
+}
+.commanMargin{
+  margin:10px;
+  
+}
+.main-div{
+  background-color: #3B405A;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+.first-div{
+  background-color: #1C1F35;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  width: 90%;
+}
+.second-div{
+  background-color: #1C1F35;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  width: 90%;
 }
