@@ -1,21 +1,22 @@
 import React from 'react';
 import {Card, ListGroup} from 'react-bootstrap';
+import './comp.css';
 
 
-export function Smartcontract() {
+export function Smartcontract(props) {
     return (
         <div className="row" id="smartcontract">
             <div className="col-lg-12">
-                <div className="col-lg-6">
-                        <Card>
+                <div className="col-lg-10">
+                        <Card className="design">
                             <Card.Header>Smart Contract Details</Card.Header>
                             <ListGroup variant="flush">
-                                    <ListGroup.Item>Contract Address</ListGroup.Item>
-                                    <ListGroup.Item>Contract Balance</ListGroup.Item>
-                                    <ListGroup.Item>Total Transactions</ListGroup.Item>
-                                    <ListGroup.Item>Total Deposit</ListGroup.Item>
-                                    <ListGroup.Item>Pool Balance</ListGroup.Item>
-                                    <ListGroup.Item>Weekly Pool Count</ListGroup.Item>
+                                    <ListGroup.Item className="designList">Contract Address <span>{props.state.contract}</span></ListGroup.Item>
+                                    <ListGroup.Item className="designList">Contract Balance<span>{props.state.contractBalance}</span></ListGroup.Item>
+                                    <ListGroup.Item className="designList">Total Transactions</ListGroup.Item>
+                                    <ListGroup.Item className="designList">Total Deposit</ListGroup.Item>
+                                    <ListGroup.Item className="designList">Pool Balance</ListGroup.Item>
+                                    <ListGroup.Item className="designList">Weekly Pool Count</ListGroup.Item>
                                 </ListGroup>
                         </Card> 
                 </div>

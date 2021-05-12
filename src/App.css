@@ -5,17 +5,61 @@
   width:100%;
 }
 
-/* .container {
-    background-color:lightgray;
-} */
-
-
-#btnConnect {
-  margin-left: 1150px;
+.container {
+    background-color:#354f52;
+    display: flex;
+    flex-direction: column;
+}
+.smartcontract{
+  align-items: center;
+}
+.tables{
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  background-color: #52796f;
+  color: #cad2c5;
 }
 
-#transaction  {
+/* #btnConnect {
+  margin: 0px;
+} */
+.footer{
+  display: flex;
+  background-color: #52796f;
+  color: #cad2c5;
+  padding: auto;
+  justify-content: center;
+  margin-top:20px;
+  align-items: flex-start;
+}
+#deposit{
+
+  background-color: #52796f;
+  color: #cad2c5;
+}
+#withdraw{
+  background-color: #52796f;
+  color: #cad2c5;
+}
+
+.navbar{
+  margin-top:20px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  background-color: #52796f;
+  color: #cad2c5;
+}
+
+#transaction, #smartcontract {
   margin-top: 40px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
 }
 
 .App-logo {

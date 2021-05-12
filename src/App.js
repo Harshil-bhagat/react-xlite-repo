@@ -1,12 +1,15 @@
 import './App.css';
 import getWeb3 from "./getWeb3";
+import axios from "axios";
 import React, { Component } from "react";
-import {Navbar, Button} from 'react-bootstrap';
+import {Navbar, Button, Modal} from 'react-bootstrap';
 import {StatisticCards} from './Components/StatisticCards';
 // import {TransactionsCards} from './Components/TransactionsCards';
 import {Tables} from './Components/Tables';
 import {Smartcontract} from './Components/Smartcontract';
 import {Footer} from './Components/Footer';
+import CustomModal from './Components/CustomModal'
+
 
 
 class App extends Component {
@@ -14,31 +17,35 @@ class App extends Component {
 ABI = [ { "anonymous": false, "inputs": [ { "indexed": false, "internalType": "address", "name": "", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "", "type": "uint256" } ], "name": "Received", "type": "event" }, { "inputs": [], "name": "receiveMoney", "outputs": [], "stateMutability": "payable", "type": "function" }, { "stateMutability": "payable", "type": "fallback" }, { "inputs": [ { "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "withdrawMoney", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address payable", "name": "_to", "type": "address" }, { "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "withdrawMoneyTo", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "stateMutability": "payable", "type": "receive" }, { "inputs": [], "name": "balanceReceived", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "getBalance", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" } ]
 ContractAddress="0x90fF7b045B7607f537ad4Ab6fE52F996B0612Eb1"
 state = { web3: null, account: null, accountBalance: 0, contract: null, contractBalance: 0, connected : false};
+
   getWeb = async () => {
     try {
       // Get network provider and web3 instance.
       console.log("inside getweb");
       const web3 = await getWeb3();
-      console.log(web3)
+      console.log("0");
+      // console.log(web3);
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
       let account = accounts[0];
-      console.log(account)
+      // console.log(web3.eth.getBalance(account));
+      // console.log(account);
       //Check Account Balance
       let accbalance = await web3.eth.getBalance(accounts[0]);
-      accbalance = web3.utils.fromWei(accbalance);
+      // console.log("1");
       
+      accbalance = web3.utils.fromWei(accbalance);
+      // console.log("2");
       // Get the contract instance.
       // const networkId = await web3.eth.net.getId();
       const SendMoneyContract = new web3.eth.Contract(this.ABI,this.ContractAddress);
-      SendMoneyContract.options.address = this.ContractAddress;
+      // console.log("3");
       let conBalance = await web3.eth.getBalance(this.ContractAddress);
+      // console.log("4");
       conBalance= web3.utils.fromWei(conBalance);
-      // let sendToContract = await instance.methods.receiveMoney().send({from:account,to:this.ContractAddress, value:web3.utils.toWei('5', 'ether')});
-      // console.log(sendToContract);
-      // let value = await web3.utils.toWei('1', 'ether');
-      // const receipt = await instance.methods.withdrawMoney(value).send({from:account});
+      // console.log("money");
       this.setState({ web3:web3, account, accountBalance: accbalance, contract:this.ContractAddress, contractBalance: conBalance, connected: true });
+      // console.log(SendMoneyContract);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -93,13 +100,28 @@ withdraw = async ()=>{
   render() {
     return(
         <div className="container">
-          <div className="navbar">
-            <Navbar id="topnav">
-                <Button variant="outline-primary" id="btnConnect" onClick={this.getWeb}>Connect</Button>
+          <div id="topnav">
+            <Navbar className="navbar">
+                <span>Dashboard</span>
+                <Button className="nav-item btn btn-info" onClick={this.getWeb}>Connect</Button>
+
             </Navbar>
           </div>
+          {this.state.connected?
+          <Modal show={true} onHide={()=>{this.setState({connected:false})}}>
+          <Modal.Header>
+            <Modal.Title>Login/Regitration</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>You are Registered!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={()=>{this.setState({connected:false})}}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+         : null}
           <div className="cards">
-                  <StatisticCards/>
+                  <StatisticCards state={this.state}/>
           </div>
           <div className="transactionCards">
           <div className="row" id="transaction">
@@ -107,7 +129,7 @@ withdraw = async ()=>{
             <div className="card" id="deposit">
                                     <div className="card-body">
                                         <h4 className="mt-0 header-title">Deposit</h4>
-                                        <p className="text-muted mb-4">Deposit in USD </p>
+                                        <p className="mb-4">Deposit in USD </p>
                                         <div className="row">
                                             <div className="col-lg-8">
                                             <div className="form-group">
@@ -116,7 +138,7 @@ withdraw = async ()=>{
                                             </div> 
                                             </div>                            
                                             <div className="col-lg-4">
-                                                <button type="submit" className="btn btn-primary ml-2" onClick={this.deposit}>Deposit</button>
+                                                <button type="submit" className="btn btn-info ml-2" onClick={this.deposit}>Deposit</button>
                                             </div>                                                                   
                                      </div>
                                 </div>
@@ -126,7 +148,7 @@ withdraw = async ()=>{
             <div className="card" id="withdraw" >
                 <div className="card-body">
                     <h4 className="mt-0 header-title">Withdraw</h4>
-                    <p className="text-muted mb-4">Withdraw upto $ 50 USD</p>
+                    <p className="mb-4">Withdraw upto $ 50 USD</p>
                         <div className="row">
                             <div className="col-lg-8">
                                 <div className="form-group">
@@ -135,7 +157,7 @@ withdraw = async ()=>{
                                 </div> 
                             </div>
                         <div className="col-lg-4">
-                            <button type="submit" className="btn btn-primary ml-2" id="withbtn" onClick={this.withdraw}>Withdraw</button>     
+                            <button type="submit" className="btn btn-info ml-2" id="withbtn" onClick={this.withdraw}>Withdraw</button>     
                         </div>                                                          
                 </div>                                               
                 </div>
@@ -143,14 +165,14 @@ withdraw = async ()=>{
         </div>
     </div>
           </div>
-          <div className="table">
+          <div className="tables">
             <Tables />
           </div>
-          <div className="smartcontract">
-            <Smartcontract/>
+          <div className="smartcontract" >
+            <Smartcontract state={this.state}/>
           </div>
           <div className="footer">
-            <Footer/>
+          <h6>Copyright © 2021 BNBGain Community. All rights reserved.</h6>
           </div>
         </div>
   );
