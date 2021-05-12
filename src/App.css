@@ -5,6 +5,19 @@
   width:100%;
 }
 
+/* .container {
+    background-color:lightgray;
+} */
+
+
+#btnConnect {
+  margin-left: 1150px;
+}
+
+#transaction  {
+  margin-top: 40px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

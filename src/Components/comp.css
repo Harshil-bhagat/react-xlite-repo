@@ -1,0 +1,37 @@
+
+
+#btnConnect {
+    margin-left: 1150px;
+}
+
+/* .navbar
+{
+    background-color: rgb(188, 224, 247);
+   
+} */
+
+.cards {
+    margin-top:  40px;
+}
+
+#transaction , #smartcontract  {
+    margin-top: 40px;
+}
+
+#deposit , #withdraw {
+    height: 250px;
+}
+
+#withbtn {
+   margin: 10px;
+    width: 100px;
+}
+
+#tableforpackage, #tableforwithdraw {
+    margin-top: 40px;
+}
+
+.foo{
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
